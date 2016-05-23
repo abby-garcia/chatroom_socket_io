@@ -14,12 +14,13 @@ $(document).ready(function() {
 
     var message = input.val();
     addMessage(message);
-    socket.emit('message', message); // Here we call the socket.emit function. This sends a message to the Socket.IO server. 
+    socket.emit('message', message);
     input.val('');
     socket.on('message', addMessage);
 
 });
-
-
-
 });
+
+
+
+
