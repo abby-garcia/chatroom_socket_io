@@ -8,11 +8,12 @@ app.use(express.static('public'));
 var server = http.Server(app);
 var io = socket_io(server);
 
-var counter = 0;
+var counter = 1;
 
 
 io.on('connection', function (socket) {
     console.log('Client connected');
+    console.log(counter++);
     
 
     socket.on('message', function(message) {
@@ -20,11 +21,11 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('message', message);
     });
 
-    socket.on('login', function(){
-    	counter++;
-    }
+  
 
-
+    socket.on('disconnect',function(socket){
+    	console.log('Client disconnected')
+    });
 
 
 
@@ -38,8 +39,9 @@ server.listen(8080);
 
 
 // Two things on the list to do:
-// Display how many users are connected 
-//when someone connects/disconnects
+// Display how many users are connected - YAY.
+//when someone connects/disconnects - YAY.
+// Nickname
 
 
 
