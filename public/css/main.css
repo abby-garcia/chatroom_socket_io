@@ -84,6 +84,12 @@ html, body {
   padding: 10px 20px 10px 20px;
 }
 
+span.username {
+  font-weight: bold;
+  color: red;
+  padding-right: 10px;
+}
+
 
 /* Input */
 

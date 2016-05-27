@@ -8,31 +8,56 @@ app.use(express.static('public'));
 var server = http.Server(app);
 var io = socket_io(server);
 
-var counter = 1;
+var numUsers = 0;
 
 
 io.on('connection', function (socket) {
-    console.log('Client connected');
-    console.log(counter++);
-    
+    var addedUser = false;
 
-    socket.on('message', function(message) {
-        console.log('Received message:', message);
-        socket.broadcast.emit('message', message);
+    socket.on('add user', function(username){
+    	if (addedUser) return;
+
+    	socket.username = username;
+    	++numUsers;
+    	
+    	addedUser = true;
+    	socket.emit('login', {
+    		numUsers: numUsers
+    	});
+
+    	socket.broadcast.emit('user joined', {
+    		username: socket.username,
+    		numUsers: numUsers
+    	});
+    });
+
+
+    socket.on('new message', function(data) {
+        // console.log('Received message:', message);
+        socket.broadcast.emit('new message', {
+        	username: socket.username,
+        	message: data
+        });
     });
 
   
 
-    socket.on('disconnect',function(socket){
-    	console.log('Client disconnected')
+    socket.on('disconnect',function(){
+    	// console.log('Client disconnected')
+    	if (addedUser) {
+    		--numUsers;
+
+    		socket.broadcast.emit('user left', {
+    			username: socket.username,
+    			numUsers: numUsers
+    		});
+    	}
     });
-
-
-
-
 });
 
-server.listen(8080);
+server.listen(8080, function(){
+	console.log('Server listening at port 8080');
+});
 
 
 
