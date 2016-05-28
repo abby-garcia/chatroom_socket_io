@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var socket = io();
 
-    var $window = $(window);
+    var $window = $(window); // we're creating variables with "$" in front of it to state that 
     var $inputMessage = $('.messageInput');
     var $messages = $('#messages');
     var $usernameInput = $('.usernameInput');
@@ -9,7 +9,7 @@ $(document).ready(function() {
     var $chatPage = $('.chatroom_page');
     var $loginPage = $('.loginPage');
 
-    var username;
+    var username; 
     var connected = false;
     var $currentInput = $usernameInput.focus();
 
