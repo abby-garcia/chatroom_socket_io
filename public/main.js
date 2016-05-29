@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var socket = io();
 
-    var $window = $(window); // we're creating variables with "$" in front of it to state that 
+    var $window = $(window); // we're creating variables with "$" , tells you you're using a jquery object; also saves time and jquery loading it only saves it once
     var $inputMessage = $('.messageInput');
     var $messages = $('#messages');
     var $usernameInput = $('.usernameInput');
@@ -14,7 +14,7 @@ $(document).ready(function() {
     var $currentInput = $usernameInput.focus();
 
     function log (message, options){
-        var $el = $('<li>').addClass('log').text(message);
+        var $el = $('<li>').addClass('log').text(message); // "$el" - when creating a new element that doesn't exisit on the page
         addMessageElement($el, options);
     }
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
         } else {
             $messages.append($el);
         }
-        $messages[0].scrollTop = $messages[0].scrollHeight;
+        $messages[0].scrollTop = $messages[0].scrollHeight; // this makes the sentence appear at the bottom & looks like it pops out at the end
     }
 
     function addParticipantsMessage (data) {
@@ -49,11 +49,11 @@ $(document).ready(function() {
         } else {
             message += "there are " + data.numUsers + " participants";
         }
-        log(message);
+        log(message); // helpful function that ads thing to our screen
     }
 
     function setUsername() {
-        username = cleanInput($usernameInput.val().trim());
+        username = cleanInput($usernameInput.val().trim()); //trim is used to take away any spaces
 
         if (username) {
             $loginPage.fadeOut();
