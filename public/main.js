@@ -1,22 +1,27 @@
 $(document).ready(function() {
+    // initialize variables
     var socket = io();
-
     var $window = $(window); // we're creating variables with "$" , tells you you're using a jquery object; also saves time and jquery loading it only saves it once
-    var $inputMessage = $('.messageInput');
-    var $messages = $('#messages');
-    var $usernameInput = $('.usernameInput');
+    var $inputMessage = $('.messageInput'); //input message box
+    var $messages = $('#messages'); //messages area
+    var $usernameInput = $('.usernameInput'); // input for username
     
-    var $chatPage = $('.chatroom_page');
-    var $loginPage = $('.loginPage');
+    var $chatPage = $('.chatroom_page'); // chatroom page
+    var $loginPage = $('.loginPage'); // login page 
 
+    // prompts for setting a username
     var username; 
     var connected = false;
-    var $currentInput = $usernameInput.focus();
+    var $currentInput = $usernameInput.focus(); // ".focus()" highlights the area
 
-    function log (message, options){
+    
+    // function log will 
+    function log (message, options){ 
         var $el = $('<li>').addClass('log').text(message); // "$el" - when creating a new element that doesn't exisit on the page
         addMessageElement($el, options);
     }
+
+
 
     function addMessageElement(el, options){
         var $el = $(el);
@@ -42,6 +47,8 @@ $(document).ready(function() {
         $messages[0].scrollTop = $messages[0].scrollHeight; // this makes the sentence appear at the bottom & looks like it pops out at the end
     }
 
+
+    // addParticipantsMessage will put the message of how many people are logged in at a time. 
     function addParticipantsMessage (data) {
         var message = '';
         if (data.numUsers === 1){
@@ -52,6 +59,7 @@ $(document).ready(function() {
         log(message); // helpful function that ads thing to our screen
     }
 
+    // setUsername will clean up the input. If it's true [ if(username) ] then it will do all 
     function setUsername() {
         username = cleanInput($usernameInput.val().trim()); //trim is used to take away any spaces
 
@@ -65,14 +73,16 @@ $(document).ready(function() {
         }
     }
 
+    // sendMessage will take the input message, return the value
+
     function sendMessage(){
         var message = $inputMessage.val();
 
         message = cleanInput(message);
 
-        if(message && connected){
-            $inputMessage.val('');
-            addChatMessage({
+        if(message && connected){ // if this is true, then
+            $inputMessage.val(''); // var $inputMessage = $('.messageInput'); //input message box TAKES THE VALUE
+            addChatMessage({  // 
                 username: username,
                 message: message
             });
@@ -101,7 +111,7 @@ $(document).ready(function() {
         return $('<div/>').text(input).text();
     }
 
-    $window.keydown(function(event){
+    $window.keydown(function(event){ // when they press enter, the function below will happen
         if(event.which === 13){
             if(username){
                 sendMessage();
@@ -121,7 +131,12 @@ $(document).ready(function() {
         $inputMessage.focus();
       });
 
-    socket.on('login', function(data){
+    // Socket Events
+
+    // Below are all event emitters, on a certain event, like login, it will execute the function
+    // which you made up above.
+
+    socket.on('login', function(data){ 
         connected = true;
 
         var message = "Welcome to Socket.IO Chat - ";

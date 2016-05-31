@@ -1,6 +1,6 @@
-var socket_io = require('socket.io');
-var http = require('http');
-var express = require('express');
+var socket_io = require('socket.io'); //node req
+var http = require('http'); 
+var express = require('express');  //node req
 
 var app = express();
 app.use(express.static('public'));
