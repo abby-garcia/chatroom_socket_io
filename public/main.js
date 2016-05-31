@@ -19,17 +19,16 @@ $(document).ready(function() {
     function log (message, options){ 
         var $el = $('<li>').addClass('log').text(message); // "$el" - when creating a new element that doesn't exisit on the page
         addMessageElement($el, options);
-    }
+    }    
 
 
-
-    function addMessageElement(el, options){
+    function addMessageElement(el, options){ 
         var $el = $(el);
 
         if (!options){
             options = {};
         }
-        if (typeof options.fade === 'undefined') {
+        if (typeof options.fade === 'undefined') { //"typeof" best way to see what it returns
           options.fade = true;
         }
         if (typeof options.prepend === 'undefined') {
