@@ -1,6 +1,9 @@
 *
 {
   box-sizing: border-box;
+  text-align: center;
+  font-family: 'Londrina Solid', cursive;
+  font-size: 30px;
 }
 
 html {
@@ -66,9 +69,16 @@ html, body {
 /*Chatroom*/
 .chatroom_page{
 	 display: none;
-
-
 }
+
+.chatArea{
+  text-align: center;
+}
+
+.chatArea ul{
+  list-style-type: none;
+}
+
 
 /* Messages */
 
@@ -103,4 +113,8 @@ span.username {
   position: absolute;
   right: 0;
   width: 100%;
+}
+
+.chatroom_page {
+  text-align: center;
 }
