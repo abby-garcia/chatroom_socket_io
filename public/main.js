@@ -17,7 +17,16 @@ $(document).ready(function() {
     
     // function log will 
     function log (message, options){ 
-        var $el = $('<li>').addClass('log').text(message); // "$el" - when creating a new element that doesn't exisit on the page
+        if (!options){
+            options = {};
+        }
+        if(options.hasOwnProperty('class')){
+            var className = options.class;
+        }
+        else{
+            var className = 'log';
+        }
+        var $el = $('<li>').addClass(className).text(message); // "$el" - when creating a new element that doesn't exisit on the page
         addMessageElement($el, options);
     }    
 
@@ -140,7 +149,8 @@ $(document).ready(function() {
 
         var message = "Welcome to Socket.IO Chat - ";
         log(message, {
-            prepend: true
+            prepend: true, 
+            class: "welcome"
         });
         addParticipantsMessage(data);
     });
