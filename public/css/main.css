@@ -118,3 +118,9 @@ span.username {
 .chatroom_page {
   text-align: center;
 }
+
+
+/*Styling "Welcome to Socketio*/
+.welcome{
+  font-size: 77px;
+}

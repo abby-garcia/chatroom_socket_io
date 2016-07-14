@@ -147,7 +147,7 @@ $(document).ready(function() {
     socket.on('login', function(data){ 
         connected = true;
 
-        var message = "Welcome to Socket.IO Chat - ";
+        var message = "Welcome to Socket.IO Chat!";
         log(message, {
             prepend: true, 
             class: "welcome"
